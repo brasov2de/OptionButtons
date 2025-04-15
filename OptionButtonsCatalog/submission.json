@@ -1,0 +1,28 @@
+{
+    "modelVersion": "1.0.0.0",   
+    "operation": "CreateOrUpdate",    
+    "publisherDetails": {
+      "publisherId": "Dianamics",
+      "publisherDisplayName": "Dianamics"
+    },
+    "catalogItemDefinition": {
+      "id": "OptionButtonsUnmanaged",
+      "displayName": "OptionButtons Unmanaged",
+      "description": "Button for MDA, beased on OptionSet values. Unmanaged solution.",    
+      "offer": {
+        "type": "Application",
+        "deploymentType": "Normal",
+        "engineeringName": {
+          "firstName": "Diana",
+          "lastName": "Birkelbach",
+          "email": "diana.birkelbach@orbis.de"        
+        },
+        "supportName": {
+          "firstName": "Diana",
+          "lastName": "Birkelbach",
+          "email": "diana.birkelbach@orbis.de"
+        }
+      }
+    }
+  }
+  
