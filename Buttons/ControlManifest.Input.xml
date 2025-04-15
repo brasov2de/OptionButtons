@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="Dianamics" constructor="OptionButtons" version="0.0.1" display-name-key="Buttons" description-key="Buttons description" control-type="virtual" >    
+    <external-service-usage enabled="false">
+    </external-service-usage>
+    <property name="buttons" display-name-key="Buttons" description-key="Buttons" of-type="OptionSet" usage="bound" required="true" />  
+    <property name="visibleButtons" display-name-key="Visible buttons" description-key="The buttons that should be visible" of-type="SingleLine.Text" usage="input" required="false" />
+    <property name="disabledButtons" display-name-key="Disabled buttons" description-key="The buttons that should be disabled" of-type="SingleLine.Text" usage="input" required="false" />
+    <property name="icons" display-name-key="Icons" description-key="The icons for the buttons" of-type="SingleLine.Text" usage="input" required="false" />    
+    <property name="size" display-name-key="Size" description-key="Size" of-type="Enum" usage="input" required="true">
+      <value name="small" display-name-key="small" description-key="small">small</value>
+      <value name="medium" display-name-key="medium" description-key="medium" default="true">medium</value>
+      <value name="large" display-name-key="large" description-key="large">large</value>      
+    </property>   
+    <property name="appearance" display-name-key="Appearance" description-key="Appearance" of-type="Enum" usage="input" required="true">
+      <value name="subtle" display-name-key="subtle" description-key="subtle">subtle</value>
+      <value name="primary" display-name-key="primary" description-key="primary">primary</value>
+      <value name="outline" display-name-key="outline" description-key="outline" default="true">outline</value>
+      <value name="secondary" display-name-key="secondary" description-key="secondary" >secondary</value>      
+      <value name="transparent" display-name-key="transparent" description-key="transparent">transparent</value>      
+    </property>   
+    <property name="align" display-name-key="Align" description-key="Align" of-type="Enum" usage="input" required="true">
+      <value name="Right" display-name-key="Right" description-key="Right" >RIGHT</value>
+      <value name="Center" display-name-key="Center" description-key="Center" default="true">CENTER</value>
+      <value name="Left" display-name-key="Left" description-key="Left">LEFT</value>      
+    </property>  
+    <property name="iconPosition" display-name-key="iconPosition" description-key="iconPosition" of-type="Enum" usage="input" required="true">
+      <value name="before" display-name-key="before" description-key="before" default="true">before</value>
+      <value name="after" display-name-key="after" description-key="after">after</value>      
+    </property>   
+    <property name="shape" display-name-key="shape" description-key="shape" of-type="Enum" usage="input" required="true">
+      <value name="circular" display-name-key="circular" description-key="circular">circular</value>
+      <value name="square" display-name-key="square" description-key="square"  default="true">square</value>      
+      <value name="rounded" display-name-key="rounded" description-key="rounded">rounded</value>      
+    </property>   
+    <!--property name="useOptionsColor" display-name-key="Use options color" description-key="Use options color" of-type="Enum" usage="input" required="true">
+      <value name="No" display-name-key="No" description-key="No" default="true">NO</value>
+      <value name="Yes" display-name-key="Yes" description-key="Yes">YES</value>      
+    </property-->     
+    <resources>
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.14.0" />
+      <platform-library name="Fluent" version="9.46.2" />
+      <!-- UNCOMMENT TO ADD MORE RESOURCES
+      <css path="css/Buttons.css" order="1" />
+      <resx path="strings/Buttons.1033.resx" version="1.0.0" />
+      -->
+    </resources>
+  </control>
+</manifest>
