@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Dianamics" constructor="OptionButtons" version="0.0.4" display-name-key="Buttons" description-key="Buttons description" control-type="virtual" >    
+  <control namespace="Dianamics" constructor="OptionButtons" version="0.0.8" display-name-key="OptionButtons" description-key="OptionButtons description" control-type="virtual" >    
     <external-service-usage enabled="false">
     </external-service-usage>
     <property name="buttons" display-name-key="Buttons" description-key="Buttons" of-type="OptionSet" usage="bound" required="true" />  
@@ -33,6 +33,10 @@
       <value name="square" display-name-key="square" description-key="square"  default="true">square</value>      
       <value name="rounded" display-name-key="rounded" description-key="rounded">rounded</value>      
     </property>   
+    <property name="clickedButton" display-name-key="Clicked button" description-key="Clicked button" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="isCanvas" display-name-key="Is canvas" description-key="Is canvas" of-type="TwoOptions" usage="input" required="false" default-value="false"  pfx-default-value="true" hidden="true" />
+
+    <event name="onClicked" display-name-key="On clicked" description-key="On clicked" />
     <!--property name="useOptionsColor" display-name-key="Use options color" description-key="Use options color" of-type="Enum" usage="input" required="true">
       <value name="No" display-name-key="No" description-key="No" default="true">NO</value>
       <value name="Yes" display-name-key="Yes" description-key="Yes">YES</value>      

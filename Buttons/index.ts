@@ -7,6 +7,10 @@ import * as React from "react";
 
 export class OptionButtons implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private notifyOutputChanged: () => void;
+    private context: ComponentFramework.Context<IInputs> | undefined;
+    private value: string | undefined ;
+    private isCanvas  = false;
+    private events : string[] = [];
 
     /**
      * Empty constructor.
@@ -30,13 +34,30 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
         this.notifyOutputChanged = notifyOutputChanged;
     }
 
+    private onClicked(value: string | undefined) {
+        
+        this.value = value;     
+        if(this.isCanvas===true) {            
+            this.events.push("onClicked" );     
+            this.notifyOutputChanged();       
+        }
+        else {
+            this.context?.events.onClicked(value);
+        }
+    }
+
     /**
      * Called when any value in the property bag has changed. This includes field values, data-sets, global values such as container height and width, offline status, control metadata values such as label, visible, etc.
      * @param context The entire property bag available to control via Context Object; It contains values as set up by the customizer mapped to names defined in the manifest, as well as utility functions
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-           
+        this.context = context;        
+        this.isCanvas = context.parameters.isCanvas?.raw ?? false;  
+       if(this.isCanvas===true && this.events.length>0) {
+            this.events = [];
+            this.context?.events.onClicked();
+       }
         return React.createElement(
             ButtonsApp, {
                 options: context.parameters.buttons?.attributes?.Options ?? [],
@@ -54,6 +75,7 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
                    /* context.parameters.value.setValue(value);
                     this.notifyOutputChanged();*/
                 },
+                onClicked: this.onClicked.bind(this),
                 webAPI: context.webAPI
             }
         );
@@ -64,7 +86,10 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as "bound" or "output"
      */
     public getOutputs(): IOutputs {
-        return { };
+        return {
+            clickedButton: this.value
+            // Add other outputs if needed
+         };
     }
 
     /**

@@ -15,11 +15,12 @@ export interface IButtonsAppProps{
     appearance: "subtle" | "primary" | "outline" | "secondary" | "transparent";
     iconPosition: "before" | "after";
     shape: "circular" | "square" | "rounded";
+    onClicked: (value: string |undefined) => void;
     theme?: Theme;
 }
 
 
-export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, align, setValue, webAPI, size, appearance, iconPosition, shape, theme}: IButtonsAppProps ) : JSX.Element =>{
+export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, align, setValue, webAPI, size, appearance, iconPosition, shape, theme, onClicked}: IButtonsAppProps ) : JSX.Element =>{
 
     const parseButtonsInput = (input : string | null) : (number | undefined) [] |undefined => {
         if(input == null) {
@@ -35,6 +36,9 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
     const visibleBtns = parseButtonsInput(visibleButtons);
   //  const whiteBtns = parseButtonsInput(whiteButtons)
 
+  const onClick : React.MouseEventHandler<HTMLButtonElement> = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClicked?.(event?.currentTarget.value);
+  }
    
     return (
         <FluentProvider theme={theme ?? webLightTheme}>
@@ -48,7 +52,7 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
                     primary=false;
                   //  color = mainColor;
                 }*/
-               return <Button key={option.Value} appearance={appearance} iconPosition={iconPosition} shape={shape} size={size}>{option.Label}</Button>
+               return <Button key={option.Value} appearance={appearance} iconPosition={iconPosition} shape={shape} size={size} onClick={onClick} value={option.Value} >{option.Label}</Button>
             }
             return undefined;
         })
