@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import {Button, FluentProvider, Theme, webLightTheme} from "@fluentui/react-components";
+import { DynamicIcon  } from './Icons';
+
 
 export interface IButtonsAppProps{
     options: ComponentFramework.PropertyHelper.OptionMetadata[];
@@ -52,7 +54,13 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
                     primary=false;
                   //  color = mainColor;
                 }*/
-               return <Button key={option.Value} appearance={appearance} iconPosition={iconPosition} shape={shape} size={size} onClick={onClick} value={option.Value} >{option.Label}</Button>
+               return <Button key={option.Value} appearance={appearance} 
+                iconPosition={iconPosition} shape={shape} size={size} 
+                onClick={onClick} 
+                value={option.Value} 
+                icon={<DynamicIcon iconName= "CalculatorFilled" color='green'/>}
+                //icon={<DismissFilled/>}
+                >{option.Label}</Button>
             }
             return undefined;
         })

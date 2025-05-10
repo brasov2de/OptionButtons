@@ -5,7 +5,7 @@ import { ButtonsApp } from "./components/ButtonsApp";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import * as React from "react";
 
-export class OptionButtons implements ComponentFramework.ReactControl<IInputs, IOutputs> {
+export class Fluent9Buttons implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private notifyOutputChanged: () => void;
     private context: ComponentFramework.Context<IInputs> | undefined;
     private value: string | undefined ;
