@@ -1,7 +1,5 @@
-/* eslint-disable promise/always-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
- 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
+ /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 //import * as FluentIcons from "@fluentui/react-icons";
