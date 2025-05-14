@@ -74,12 +74,10 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
                 iconPosition: context.parameters.iconPosition.raw,
                 shape: context.parameters.shape.raw,
                 theme: (context as any).fluentDesignLanguage?.tokenTheme,
-                setValue: (value: number | undefined) => {
-                   /* context.parameters.value.setValue(value);
-                    this.notifyOutputChanged();*/
-                },
+                type: context.parameters.type.raw ?? "button",                
                 onClicked: this.onClicked.bind(this),
-                webAPI: context.webAPI
+                webAPI: context.webAPI, 
+                value : this.value ??  context.parameters.option?.raw,
             }
         );
     }
