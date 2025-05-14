@@ -8,11 +8,14 @@ import { FluentIcons } from "./FluentIcons";
 
 
 export interface TIconProps {
-    iconName: string;
+    iconName: string |undefined;
     color?: string;
 }
 
 export function DynamicIcon({iconName, color}: TIconProps ) {
+    if(iconName == null || iconName === "") {
+        return null;
+    }
     const icon = (FluentIcons as any)[iconName];
     if (icon) {
         return React.createElement(icon, {color: color}) as JSX.Element;

@@ -1,0 +1,2 @@
+
+//Xrm.Page.getControl("diana_buttoncodes").addEventHandler("onClicked", (value) => {console.log(value)})

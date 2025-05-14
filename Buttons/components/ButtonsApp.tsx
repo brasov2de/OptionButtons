@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import {Button, FluentProvider, Theme, webLightTheme} from "@fluentui/react-components";
-import { DynamicIcon  } from './Icons';
+import { DynamicIcon  } from './DynamicIcon';
 
 
 export interface IButtonsAppProps{
     options: ComponentFramework.PropertyHelper.OptionMetadata[];
     visibleButtons: string |null;
     disabledButtons:string | null;    
-    icons : any;
+    icons : string | null;
     align: "RIGHT" | "CENTER" | "LEFT";
    // useOptionsColor: "YES" | "NO";
     setValue: (value : number |undefined) => void;    
@@ -17,12 +17,27 @@ export interface IButtonsAppProps{
     appearance: "subtle" | "primary" | "outline" | "secondary" | "transparent";
     iconPosition: "before" | "after";
     shape: "circular" | "square" | "rounded";
-    onClicked: (value: string |undefined) => void;
+    onClicked: (value: number |undefined) => void;
     theme?: Theme;
 }
 
 
 export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, align, setValue, webAPI, size, appearance, iconPosition, shape, theme, onClicked}: IButtonsAppProps ) : JSX.Element =>{
+
+    const [allIcons, setAllIcons] = React.useState<Record<string, string>>({});
+    React.useEffect(() => {
+        try{
+            if(icons == null || icons === "") {
+                setAllIcons({});
+                return;
+            }
+            const parsed = JSON.parse(icons ?? "{}") as Record<string, string>;
+            setAllIcons(parsed);
+        }
+        catch(e){
+            console.error("Error parsing icons JSON:", e);
+        }
+    }, [icons]);
 
     const parseButtonsInput = (input : string | null) : (number | undefined) [] |undefined => {
         if(input == null) {
@@ -39,7 +54,10 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
   //  const whiteBtns = parseButtonsInput(whiteButtons)
 
   const onClick : React.MouseEventHandler<HTMLButtonElement> = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onClicked?.(event?.currentTarget.value);
+    const val = event.currentTarget.value;
+    if(val != null ){
+        onClicked?.(parseInt(val));
+    }
   }
    
     return (
@@ -48,6 +66,8 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
         {options.map((option) => {
            
             if( visibleBtns === undefined || visibleBtns.includes(option.Value)) {
+                const icon = allIcons[option.Value] || undefined;
+                const color = option.Color ?? undefined;
                 /*let primary = true;
                 let color : string | undefined = useOptionsColor==="YES" ?  option.Color : undefined;
                 if(whiteBtns?.includes(option.Value) || useOptionsColor==="YES" && option.Color?.toLowerCase()==="#ffffff" || option.Color?.toLowerCase()==="white"){
@@ -58,7 +78,7 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
                 iconPosition={iconPosition} shape={shape} size={size} 
                 onClick={onClick} 
                 value={option.Value} 
-                icon={<DynamicIcon iconName= "CalculatorFilled" color='green'/>}
+                icon={ icon ? <DynamicIcon iconName={icon} color={color}/> : null}
                 //icon={<DismissFilled/>}
                 >{option.Label}</Button>
             }

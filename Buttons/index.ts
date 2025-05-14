@@ -5,10 +5,10 @@ import { ButtonsApp } from "./components/ButtonsApp";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import * as React from "react";
 
-export class Fluent9Buttons implements ComponentFramework.ReactControl<IInputs, IOutputs> {
+export class OptionButtons implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private notifyOutputChanged: () => void;
     private context: ComponentFramework.Context<IInputs> | undefined;
-    private value: string | undefined ;
+    private value: number | undefined ;
     private isCanvas  = false;
     private events : string[] = [];
 
@@ -34,11 +34,12 @@ export class Fluent9Buttons implements ComponentFramework.ReactControl<IInputs, 
         this.notifyOutputChanged = notifyOutputChanged;
     }
 
-    private onClicked(value: string | undefined) {
+    private onClicked(value: number | undefined) {
         
         this.value = value;     
         if(this.isCanvas===true) {            
-            this.events.push("onClicked" );     
+            this.events.push("onClicked" );  
+            this.value = value;   
             this.notifyOutputChanged();       
         }
         else {
@@ -60,7 +61,7 @@ export class Fluent9Buttons implements ComponentFramework.ReactControl<IInputs, 
        }
         return React.createElement(
             ButtonsApp, {
-                options: context.parameters.buttons?.attributes?.Options ?? [],
+                options: context.parameters.option?.attributes?.Options ?? [],
                 visibleButtons: context.parameters.visibleButtons?.raw ?? "",
                 disabledButtons: context.parameters.disabledButtons.raw,            
                 icons: context.parameters.icons.raw,
@@ -87,7 +88,7 @@ export class Fluent9Buttons implements ComponentFramework.ReactControl<IInputs, 
      */
     public getOutputs(): IOutputs {
         return {
-            clickedButton: this.value
+            option: this.value
             // Add other outputs if needed
          };
     }
