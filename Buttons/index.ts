@@ -8,7 +8,8 @@ import * as React from "react";
 export class OptionButtons implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private notifyOutputChanged: () => void;
     private context: ComponentFramework.Context<IInputs> | undefined;
-    private value: number | undefined ;
+    private value: number | undefined ;    
+    private eventValue : {value: number | undefined, text: string|undefined, color: string |undefined,extended: string} ;
     private isCanvas  = false;
     private events : string[] = [];
 
@@ -34,16 +35,17 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
         this.notifyOutputChanged = notifyOutputChanged;
     }
 
-    private onClicked(value: number | undefined) {
+    private onClicked(value: number | undefined, text: string |undefined, color: string |undefined) {
         
         this.value = value;     
+        this.eventValue = {value: value, text: text, color: color, extended: ""};
         if(this.isCanvas===true) {            
             this.events.push("onClicked" );  
             this.value = value;   
             this.notifyOutputChanged();       
         }
         else {
-            this.context?.events.onClicked(value);
+            this.context?.events.onClicked(this.eventValue);
         }
     }
 

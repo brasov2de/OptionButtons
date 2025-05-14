@@ -17,7 +17,7 @@ export interface IButtonsAppProps{
     appearance: "subtle" | "primary" | "outline" | "secondary" | "transparent";
     iconPosition: "before" | "after";
     shape: "circular" | "square" | "rounded";
-    onClicked: (value: number |undefined) => void;
+    onClicked: (value: number | undefined, text: string |undefined, color: string |undefined) => void;
     theme?: Theme;
 }
 
@@ -55,8 +55,10 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
 
   const onClick : React.MouseEventHandler<HTMLButtonElement> = (event: React.MouseEvent<HTMLButtonElement>) => {
     const val = event.currentTarget.value;
+    const text = event.currentTarget.innerText;
+    const color = options.find((option) => option.Value === parseInt(val))?.Color;
     if(val != null ){
-        onClicked?.(parseInt(val));
+        onClicked?.(parseInt(val), text, color);
     }
   }
    
