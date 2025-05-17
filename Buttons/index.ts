@@ -34,6 +34,7 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
     }
+     
 
     private onClicked(value: number | undefined, text: string |undefined, color: string |undefined) {
         

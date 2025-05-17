@@ -31,7 +31,7 @@ const TabsList: React.FC<TabListProps> = ({ options , align, size, appearance, i
                         //shape={shape} 
                         //size={size} 
                         onClick={onClick} 
-                        value={option.Value} 
+                        value={option.Value}                         
                         icon={ icon ? <DynamicIcon iconName={icon} color={color}/> : null}                        
                         >{option.Label}</Tab>
                     }

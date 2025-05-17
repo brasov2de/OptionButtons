@@ -12,7 +12,7 @@ interface ButtonListProps {
     disabledButtons:number[] | undefined;
     visibleButtons: number[] | undefined;
     allIcons: Record<string, string>;
-    onClick:  React.MouseEventHandler<HTMLButtonElement>;
+    onClick:  React.MouseEventHandler<HTMLButtonElement>;    
 }
 
 const ButtonList: React.FC<ButtonListProps> = ({ options , align, size, appearance, iconPosition, shape, disabledButtons, visibleButtons, allIcons, onClick}) => {

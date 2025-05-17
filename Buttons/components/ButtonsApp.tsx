@@ -27,9 +27,12 @@ export interface IButtonsAppProps{
 
 
 export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, align, webAPI, size, appearance, iconPosition, shape, type, theme, onClicked, value}: IButtonsAppProps ) : JSX.Element =>{
-    const [thisValue, setThisValue] = React.useState<number | null>(value);
+    const [thisValue, setThisValue] = React.useState<number | null>(value);    
 
     const [allIcons, setAllIcons] = React.useState<Record<string, string>>({});
+    React.useEffect(() => {
+        setThisValue(value);
+    }, [value]);
     React.useEffect(() => {
         try{
             if(icons == null || icons === "") {
@@ -81,7 +84,7 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
                 disabledButtons={disabledBtns}
                 visibleButtons={visibleBtns}
                 allIcons={allIcons}
-                onClick={onClick}
+                onClick={onClick}                
             />
             : <TabsList
             align={align}
