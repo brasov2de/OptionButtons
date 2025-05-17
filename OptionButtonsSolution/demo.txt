@@ -1,2 +1,17 @@
 
-//Xrm.Page.getControl("diana_buttoncodes").addEventHandler("onClicked", (value) => {console.log(value)})
+
+
+Xrm.Page.getControl("diana_buttoncodes").addEventHandler("onClicked", (executionContext) => {
+    console.log(executionContext); 
+    const eventArgs = executionContext.getEventArgs();
+    console.log("isDefaultPrevented", eventArgs.isDefaultPrevented()); 
+    if (args.value==1) {
+        eventArgs.preventDefault()
+    }
+})
+
+Xrm.Page.getControl("diana_buttoncodes").addEventHandler("onClicked", (executionContext) => {
+    console.log(executionContext); 
+    const eventArgs = executionContext.getEventArgs();
+    console.log("isDefaultPrevented", eventArgs.isDefaultPrevented());   
+})

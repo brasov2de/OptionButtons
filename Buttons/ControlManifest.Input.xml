@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Dianamics" constructor="OptionButtons" version="0.0.19" display-name-key="OptionButtons" description-key="OptionButtons" control-type="virtual" >    
+  <control namespace="Dianamics" constructor="OptionButtons" version="0.0.23" display-name-key="OptionButtons" description-key="OptionButtons" control-type="virtual" >    
     <external-service-usage enabled="false">
     </external-service-usage>
     <property name="option" display-name-key="Option" description-key="Option" of-type="OptionSet" usage="bound" required="true" />  

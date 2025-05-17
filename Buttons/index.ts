@@ -9,7 +9,7 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
     private notifyOutputChanged: () => void;
     private context: ComponentFramework.Context<IInputs> | undefined;
     private value: number | undefined ;    
-    private eventValue : {value: number | undefined, text: string|undefined, color: string |undefined,extended: string} ;
+   
     private isCanvas  = false;
     private events : string[] = [];
 
@@ -35,18 +35,35 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
         this.notifyOutputChanged = notifyOutputChanged;
     }
      
+   
 
-    private onClicked(value: number | undefined, text: string |undefined, color: string |undefined) {
         
-        this.value = value;     
-        this.eventValue = {value: value, text: text, color: color, extended: ""};
+
+    private onClicked(value: number | undefined, text: string |undefined, color: string |undefined): number | undefined {
+        const initianValue = this.value;
+        const eventArgs = {
+            value: value, 
+            text: text, 
+            color: color
+        };
+        let defaultPrevented = false;        
+        const eventArgsWithPreventDefault = {         
+            isDefaultPrevented : () => {return defaultPrevented}, 
+            preventDefault: () => {defaultPrevented = true}, 
+        };
+                                  
         if(this.isCanvas===true) {            
             this.events.push("onClicked" );  
             this.value = value;   
             this.notifyOutputChanged();       
         }
         else {
-            this.context?.events.onClicked(this.eventValue);
+            const eventArgs = {value: value, text: text, color: color, getEventArgs: () => eventArgsWithPreventDefault};
+            this.context?.events.onClicked(eventArgs);
+            if(!defaultPrevented) {                
+                this.value = value;                
+            }
+            return this.value;;
         }
     }
 

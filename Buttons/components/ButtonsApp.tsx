@@ -20,7 +20,7 @@ export interface IButtonsAppProps{
     iconPosition: "before" | "after";
     shape: "circular" | "square" | "rounded";
     type: "button" | "tabs";
-    onClicked: (value: number | undefined, text: string |undefined, color: string |undefined) => void;
+    onClicked: (value: number | undefined, text: string |undefined, color: string |undefined) => number | undefined;
     theme?: Theme;
     value: number | null;
 }
@@ -66,8 +66,9 @@ export const ButtonsApp = ({options, visibleButtons, disabledButtons,  icons, al
         const text = event.currentTarget.innerText;
         const color = options.find((option) => option.Value === parseInt(val))?.Color;
         if(val != null ){
-            setThisValue(parseInt(val));
-            onClicked?.(parseInt(val), text, color);
+            //setThisValue(parseInt(val));
+            const newValue = onClicked?.(parseInt(val), text, color);
+            setThisValue(newValue ?? null);
         }
     }
    
