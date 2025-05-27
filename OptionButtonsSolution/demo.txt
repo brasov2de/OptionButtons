@@ -5,7 +5,7 @@ Xrm.Page.getControl("diana_buttoncodes").addEventHandler("onClicked", (execution
     console.log(executionContext); 
     const eventArgs = executionContext.getEventArgs();
     console.log("isDefaultPrevented", eventArgs.isDefaultPrevented()); 
-    if (args.value==1) {
+    if (eventArgs.value==341560000) {
         eventArgs.preventDefault()
     }
 })

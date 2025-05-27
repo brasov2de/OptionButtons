@@ -41,11 +41,7 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
 
     private onClicked(value: number | undefined, text: string |undefined, color: string |undefined): number | undefined {
         const initianValue = this.value;
-        const eventArgs = {
-            value: value, 
-            text: text, 
-            color: color
-        };
+     
         let defaultPrevented = false;        
         const eventArgsWithPreventDefault = {         
             isDefaultPrevented : () => {return defaultPrevented}, 
@@ -58,7 +54,11 @@ export class OptionButtons implements ComponentFramework.ReactControl<IInputs, I
             this.notifyOutputChanged();       
         }
         else {
-            const eventArgs = {value: value, text: text, color: color, getEventArgs: () => eventArgsWithPreventDefault};
+            const eventArgs = { 
+                value: value, 
+                text: text, 
+                color: color, 
+                getEventArgs: () => eventArgsWithPreventDefault};
             this.context?.events.onClicked(eventArgs);
             if(!defaultPrevented) {                
                 this.value = value;                
